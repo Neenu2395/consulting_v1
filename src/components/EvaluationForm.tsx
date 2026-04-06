@@ -6,14 +6,37 @@ export function EvaluationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submission
-    setTimeout(() => {
+    
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xykblryv', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json();
+        if (Object.hasOwn(data, 'errors')) {
+          alert(data['errors'].map((error: any) => error['message']).join(", "));
+        } else {
+          alert("Oops! There was a problem submitting your form");
+        }
+      }
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    }
   };
 
   if (submitted) {
@@ -40,33 +63,33 @@ export function EvaluationForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Full Name</label>
-          <input required type="text" className="input-field" placeholder="John Doe" />
+          <input required name="name" type="text" className="input-field" placeholder="John Doe" />
         </div>
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Email Address</label>
-          <input required type="email" className="input-field" placeholder="john@example.com" />
+          <input required name="email" type="email" className="input-field" placeholder="john@example.com" />
         </div>
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Current GMAT/GRE</label>
-          <input required type="text" className="input-field" placeholder="740 / 330 or Practice Score" />
+          <input required name="score" type="text" className="input-field" placeholder="740 / 330 or Practice Score" />
         </div>
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Undergrad GPA & University</label>
-          <input required type="text" className="input-field" placeholder="3.8 / 4.0 - IIT Delhi" />
+          <input required name="undergrad" type="text" className="input-field" placeholder="3.8 / 4.0 - IIT Delhi" />
         </div>
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Years of Experience & Industry</label>
-          <input required type="text" className="input-field" placeholder="4 Years - Fintech" />
+          <input required name="experience" type="text" className="input-field" placeholder="4 Years - Fintech" />
         </div>
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">Target Schools (Top 3)</label>
-          <input required type="text" className="input-field" placeholder="INSEAD, HEC, LBS" />
+          <input required name="target_schools" type="text" className="input-field" placeholder="INSEAD, HEC, LBS" />
         </div>
       </div>
       
       <div className="space-y-2 mb-8">
         <label className="text-xs font-bold uppercase tracking-widest text-brand-slate">The Biggest Gap in Your Profile</label>
-        <textarea required className="input-field min-h-[120px]" placeholder="What keeps you up at night about your application?"></textarea>
+        <textarea required name="gap" className="input-field min-h-[120px]" placeholder="What keeps you up at night about your application?"></textarea>
       </div>
 
       <button 

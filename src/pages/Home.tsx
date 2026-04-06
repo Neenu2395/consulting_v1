@@ -121,9 +121,9 @@ export function Home() {
         </div>
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {[
-            { school: 'RUHR Bochum', profile: 'Applied Mechanics Engineer, Beck Engineering, Berlin', result: 'Admitted' },
+            { school: 'RUHR Bochum', profile: 'Applied mechanics engineer, Beck Engineering, Berlin', result: 'Admitted' },
             { school: 'RWTH Aachen', profile: 'Student at RWTH Aachen', result: 'Admitted' },
-            { school: 'SDA Bocconi', profile: 'Product Manager, ABB, Amazon Launch Intern, 2025 MBA Grad', result: 'Admitted' }
+            { school: 'SDA Bocconi', profile: 'Product manager, ABB, Amazon Launch intern, 2025 MBA Grad', result: 'Admitted' }
           ].map((story, i) => (
             <div key={i} className="p-8 border border-gray-100 hover:border-brand-gold transition-colors bg-brand-cream/30">
               <div className="text-brand-gold font-serif text-2xl mb-2">{story.school}</div>
