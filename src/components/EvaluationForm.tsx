@@ -11,13 +11,15 @@ export function EvaluationForm() {
     setLoading(true);
     
     const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    const data = new FormData(form);
+    const value = Object.fromEntries(data.entries());
     
     try {
       const response = await fetch('https://formspree.io/f/xykblryv', {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(value),
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
       });
@@ -25,15 +27,17 @@ export function EvaluationForm() {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        const data = await response.json();
-        if (Object.hasOwn(data, 'errors')) {
-          alert(data['errors'].map((error: any) => error['message']).join(", "));
+        const errorData = await response.json();
+        console.error('Formspree Error:', errorData);
+        if (errorData.errors) {
+          alert(errorData.errors.map((error: any) => error.message).join(", "));
         } else {
-          alert("Oops! There was a problem submitting your form");
+          alert("Oops! There was a problem submitting your form. Please try again later.");
         }
       }
     } catch (error) {
-      alert("Oops! There was a problem submitting your form");
+      console.error('Submission Error:', error);
+      alert("Oops! There was a problem submitting your form. Please check your connection.");
     } finally {
       setLoading(false);
     }
