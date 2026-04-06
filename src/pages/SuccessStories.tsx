@@ -16,7 +16,7 @@ export function SuccessStories() {
       program: 'MS in Materials Engineering',
       result: 'Admitted',
       quote: "I was struggling to differentiate my profile among thousands of applicants. The founders' dual-review process identified exactly which parts of my research experience to highlight for RWTH's rigorous standards.",
-      candidate: "Student at RWTH"
+      candidate: "Student at RWTH Aachen"
     },
     {
       school: 'SDA Bocconi',
