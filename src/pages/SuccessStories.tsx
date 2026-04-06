@@ -23,7 +23,7 @@ export function SuccessStories() {
       program: 'MBA',
       result: 'Admitted',
       quote: "Working with HEC and Bocconi alumni gave me an 'insider' perspective that no other consultant could offer. They didn't just edit my essays; they architected a narrative that showcased my true leadership potential.",
-      candidate: "Product manager at ABB, 2025 MBA Grad"
+      candidate: "Product manager, ABB, Amazon Launch intern, 2025 MBA Grad"
     }
   ];
 
