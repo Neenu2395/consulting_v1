@@ -39,9 +39,12 @@ function Footer() {
         setStatus('success');
         setEmail('');
       } else {
+        const errorData = await response.json();
+        console.error('Newsletter Formspree Error:', errorData);
         setStatus('error');
       }
     } catch (error) {
+      console.error('Newsletter Submission Error:', error);
       setStatus('error');
     }
   };
