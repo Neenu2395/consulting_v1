@@ -9,7 +9,7 @@ export function SuccessStories() {
       program: 'MS IN Computational engineering',
       result: 'Admitted',
       quote: "The strategic depth provided by the Elite Admissions team was unparalleled. They helped me articulate my technical background in a way that resonated perfectly with the German admissions committee's expectations.",
-      candidate: "Applied materials engineer, Beck Engineering, Berlin"
+      candidate: "Applied mechanics engineer, Beck Engineering, Berlin"
     },
     {
       school: 'RWTH Aachen',
